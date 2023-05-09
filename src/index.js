@@ -85,23 +85,25 @@ class GeoRaster {
 
   preinitialize(debug) {
     if (debug) console.log('starting preinitialize');
-    if (this._url) {
-      // initialize these outside worker to avoid weird worker error
-      // I don't see how cache option is passed through with fromUrl,
-      // though constantinius says it should work: https://github.com/geotiffjs/geotiff.js/issues/61
-      const ovrURL = this._url + '.ovr';
-      return urlExists(ovrURL).then(ovrExists => {
-        if (debug) console.log('overview exists:', ovrExists);
-        if (ovrExists) {
-          return fromUrls(this._url, [ovrURL], {cache: true, forceXHR: false});
-        } else {
-          return fromUrl(this._url, {cache: true, forceXHR: false});
-        }
-      });
-    } else {
-      // no pre-initialization steps required if not using a Cloud Optimized GeoTIFF
-      return Promise.resolve();
-    }
+    console.log('modified georaster version');
+//     if (this._url) {
+//       // initialize these outside worker to avoid weird worker error
+//       // I don't see how cache option is passed through with fromUrl,
+//       // though constantinius says it should work: https://github.com/geotiffjs/geotiff.js/issues/61
+//       const ovrURL = this._url + '.ovr';
+//       return urlExists(ovrURL).then(ovrExists => {
+//         if (debug) console.log('overview exists:', ovrExists);
+//         if (ovrExists) {
+//           return fromUrls(this._url, [ovrURL], {cache: true, forceXHR: false});
+//         } else {
+//           return fromUrl(this._url, {cache: true, forceXHR: false});
+//         }
+//       });
+//     } else {
+//       // no pre-initialization steps required if not using a Cloud Optimized GeoTIFF
+//       return Promise.resolve();
+//     }
+    return Promise.resolve();
   }
 
   initialize(debug) {
